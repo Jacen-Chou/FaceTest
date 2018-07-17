@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
@@ -57,6 +58,10 @@ public class Register extends MainActivity {
     private final static int MSG_EVENT_NO_FEATURE = 0x1003;
     private final static int MSG_EVENT_FD_ERROR = 0x1004;
     private final static int MSG_EVENT_FR_ERROR = 0x1005;
+
+    private final static int FACE_JUDGE = 3;//因为http传输增加参数   handler    7/17   zj
+    private int ResultCode = 2;
+
     private AFR_FSDKFace mAFR_FSDKFace;
     private UIHandler mUIHandler;
 
@@ -79,6 +84,34 @@ public class Register extends MainActivity {
         startActivityForResult(intent, REQUEST_CODE_IMAGE_CAMERA);
 
     }
+
+    //添加了SuppressLint("HandlerLeak")    //以下因注册发送数据需要该handler    增加内容   7/17   zj
+    @SuppressLint("HandlerLeak")
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg){
+            super.handleMessage(msg);
+            switch (msg.what){
+                case FACE_JUDGE:{
+                    Bundle bundle = new Bundle();
+                    bundle = msg.getData();
+                    String result = bundle.getString("result");
+                    //Toast.makeText(MainActivity.this,result,Toast.LENGTH_SHORT).show();
+                    try {
+                        if (result.equals("success")) {
+                            Toast.makeText(Register.this,"人脸提交成功！",Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(Register.this,"人脸提交失败，请重试！",Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (NullPointerException e){
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            }
+        }
+    };
+
     //按提示@
     @SuppressLint("HandlerLeak")
     class UIHandler extends android.os.Handler {
@@ -103,13 +136,25 @@ public class Register extends MainActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
-                                    String name = pref.getString("id","") ;//cookie获取信息  zj
-                                    Shibie.mFaceDB.addFace(name,mAFR_FSDKFace);//用cookie的账户命名上传data文件    zj
-
-                                    //Shibie.mFaceDB.addFace(mEditText.getText().toString(), mAFR_FSDKFace);//生成本地data文件，上传
+                                    final String id = pref.getString("id","") ;//cookie获取信息  zj
+                                    final String password = pref.getString("password","");
+                                    Shibie.mFaceDB.addFace(id,mAFR_FSDKFace);//用cookie的账户命名上传data文件    zj
+//                                    Shibie.mFaceDB.addFace(mEditText.getText().toString(), mAFR_FSDKFace);//生成本地data文件，上传
 //                                    dialog.dismiss();
-                                    //finish();//添加测试的，不确定。回到afterlogin界面   zj
-                                    finish();
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            String result = HttpLogin.FaceRegistByPost(id,password,"true");
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("result",result);
+                                            Message msg = new Message();
+                                            msg.what = FACE_JUDGE;
+                                            msg.setData(bundle);
+                                            handler.sendMessage(msg);
+                                        }
+                                    }).start();
+
+                                    finish();//添加测试的，不确定。回到afterlogin界面   zj
                                 }
                             })
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {

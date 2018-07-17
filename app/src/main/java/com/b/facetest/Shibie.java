@@ -1,6 +1,8 @@
 package com.b.facetest;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.ImageFormat;
@@ -8,9 +10,11 @@ import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arcsoft.ageestimation.ASAE_FSDKAge;
 import com.arcsoft.ageestimation.ASAE_FSDKEngine;
@@ -37,7 +41,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Shibie extends Activity implements SurfaceHolder.Callback {
+public class Shibie extends MainActivity implements SurfaceHolder.Callback {
 
     SurfaceView surfaceView;
     private SurfaceHolder surfaceHolder;
@@ -70,6 +74,8 @@ public class Shibie extends Activity implements SurfaceHolder.Callback {
     ASGE_FSDKEngine mGenderEngine = new ASGE_FSDKEngine();
     List<ASAE_FSDKAge> ages = new ArrayList<>();
     List<ASGE_FSDKGender> genders = new ArrayList<>();
+
+    private final static int IF_ARRIVE  = 4;//因为http传输增加参数   handler    7/17   zj
 
     //SharedPreferences preferences = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);//cookie获取信息  zj
 
@@ -201,6 +207,36 @@ public class Shibie extends Activity implements SurfaceHolder.Callback {
 //        startActivity(intent);
 //    }
 
+
+
+    //用于考勤打卡传输处理     7/17    zj
+    //添加了SuppressLint("HandlerLeak")
+    @SuppressLint("HandlerLeak")
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg){
+            super.handleMessage(msg);
+            switch (msg.what){
+                case IF_ARRIVE:{
+                    Bundle bundle = new Bundle();
+                    bundle = msg.getData();
+                    String result = bundle.getString("result");
+                    //Toast.makeText(MainActivity.this,result,Toast.LENGTH_SHORT).show();
+                    try {
+                        if (result.equals("success")) {
+
+                        }else{
+                            Toast.makeText(Shibie.this,"wait...",Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (NullPointerException e){
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            }
+        }
+    };
+
     class FRAbsLoop extends AbsLoop {
         AFR_FSDKVersion version = new AFR_FSDKVersion();
         AFR_FSDKEngine engine = new AFR_FSDKEngine();
@@ -242,28 +278,33 @@ public class Shibie extends Activity implements SurfaceHolder.Callback {
                 final String gender = genders.get(0).getGender() == -1 ? "性别未知" : (genders.get(0).getGender() == 0 ? "男" : "女");
 
                 if (max > 0.6f) {
-                    //fr success.
-                    final float max_score = max;
-                    final String mNameShow = name;
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
 
-                            tv_name.setAlpha(1.0f);
-                            tv_name.setText(mNameShow + "  置信度:" + (float)((int)(max_score * 1000)) / 1000.0);
-                            tv_name.setTextColor(Color.RED);
-                        }
-                    });
+
+
+//                    原代码
+                    //fr success.
+//                    final float max_score = max;
+//                    final String mNameShow = name;
+//                    mHandler.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            tv_name.setAlpha(1.0f);
+//                            tv_name.setText(mNameShow + "  置信度:" + (float)((int)(max_score * 1000)) / 1000.0);
+//                            tv_name.setTextColor(Color.RED);
+//                        }
+//                    });
                 } else {
-                    final String mNameShow = "未识别";
-                    Shibie.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            tv_name.setAlpha(1.0f);
-                            tv_name.setText(mNameShow + "   " + gender + "," + age);
-                            tv_name.setTextColor(Color.RED);
-                        }
-                    });
+//                    原代码
+//                    final String mNameShow = "未识别";
+//                    Shibie.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            tv_name.setAlpha(1.0f);
+//                            tv_name.setText(mNameShow + "   " + gender + "," + age);
+//                            tv_name.setTextColor(Color.RED);
+//                        }
+//                    });
                 }
                 mImageNV21 = null;
             }
