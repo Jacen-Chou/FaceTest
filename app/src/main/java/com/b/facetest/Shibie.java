@@ -2,9 +2,11 @@ package com.b.facetest;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.app.AlertDialog;
 import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.hardware.Camera;
@@ -77,7 +79,6 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
 
     private final static int IF_ARRIVE  = 4;//因为http传输增加参数   handler    7/17   zj
 
-    //SharedPreferences preferences = getSharedPreferences("userInfo",Activity.MODE_PRIVATE);//cookie获取信息  zj
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -224,9 +225,17 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
                     //Toast.makeText(MainActivity.this,result,Toast.LENGTH_SHORT).show();
                     try {
                         if (result.equals("success")) {
+                            new AlertDialog.Builder(Shibie.this)
+                                    //.setTitle(" ")
+                                    .setMessage("打卡考勤成功")
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                        }
+                                    })
+                                    .show();
 
-                        }else{
-                            Toast.makeText(Shibie.this,"wait...",Toast.LENGTH_SHORT).show();
                         }
                     }catch (NullPointerException e){
                         e.printStackTrace();
@@ -237,6 +246,8 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
         }
     };
 
+
+
     class FRAbsLoop extends AbsLoop {
         AFR_FSDKVersion version = new AFR_FSDKVersion();
         AFR_FSDKEngine engine = new AFR_FSDKEngine();
@@ -244,11 +255,13 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
         List<FaceDB.FaceRegist> mResgist = mFaceDB.mRegister;
         List<ASAE_FSDKFace> face1 = new ArrayList<>();
         List<ASGE_FSDKFace> face2 = new ArrayList<>();
+
         @Override
         public void setup() {
             AFR_FSDKError error = engine.AFR_FSDK_InitialEngine(FaceDB.appid, FaceDB.fr_key);
             error = engine.AFR_FSDK_GetVersion(version);
         }
+
         @Override
         public void loop() {
             if (mImageNV21 != null) {
@@ -277,12 +290,41 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
                 final String age = ages.get(0).getAge() == 0 ? "年龄未知" : ages.get(0).getAge() + "岁";
                 final String gender = genders.get(0).getGender() == -1 ? "性别未知" : (genders.get(0).getGender() == 0 ? "男" : "女");
 
-                if (max > 0.6f) {
+
+                //告知服务器人脸打卡通过功能     7/17     zj
+                if(max > 0.6f){
+                    final String id = pref.getString("id","") ;//cookie获取信息  zj
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {//开启线程告知服务器验证通过    zj
+                            String result = HttpLogin.If_Arrive(id,"true");
+                            Bundle bundle = new Bundle();
+                            bundle.putString("result",result);
+                            Message msg = new Message();
+                            msg.what = IF_ARRIVE;
+                            msg.setData(bundle);
+                            handler.sendMessage(msg);
+                        }
+                    }).start();
+                   //成功后需要跳出loop   待修改    zj
+                    //。。。。。。。
+                    over();
 
 
+                } else{
+                    Toast.makeText(Shibie.this,"wait...",Toast.LENGTH_SHORT).show();
+                }
+                mImageNV21 = null;
+//              ********************
 
-//                    原代码
-                    //fr success.
+                //***********************************
+
+//                if (max > 0.6f) {//     zj   注释
+//
+//
+//
+////                    原代码
+////                    fr success.
 //                    final float max_score = max;
 //                    final String mNameShow = name;
 //                    mHandler.post(new Runnable() {
@@ -294,8 +336,8 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
 //                            tv_name.setTextColor(Color.RED);
 //                        }
 //                    });
-                } else {
-//                    原代码
+//                } else {
+////                    原代码
 //                    final String mNameShow = "未识别";
 //                    Shibie.this.runOnUiThread(new Runnable() {
 //                        @Override
@@ -305,12 +347,16 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
 //                            tv_name.setTextColor(Color.RED);
 //                        }
 //                    });
-                }
-                mImageNV21 = null;
+//                }
+//                mImageNV21 = null;
+//            }
+//        }
+
             }
+
         }
         @Override
-        public void over() {
+        public void over () {
             AFR_FSDKError error = engine.AFR_FSDK_UninitialEngine();
         }
     }

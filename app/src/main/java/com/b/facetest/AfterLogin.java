@@ -81,7 +81,7 @@ public class AfterLogin extends Shibie{
                             intent.setClass(AfterLogin.this, Register.class);
                             startActivity(intent);
                         }else{
-                            Toast.makeText(AfterLogin.this,"你已完成人脸注册，如需修改请联系教师",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AfterLogin.this,"已人脸注册，如需修改请联系教师",Toast.LENGTH_SHORT).show();
                         }
                     }catch (NullPointerException e){
                         e.printStackTrace();

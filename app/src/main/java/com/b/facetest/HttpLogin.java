@@ -247,7 +247,7 @@ public class HttpLogin {
     }
 
     public static String If_Arrive(String id,String if_success){
-        String address = "http://192.168.43.139/FaceAttendanceSystem/AndroidIfRegisterFace.do";//需要修改地址
+        String address = "http://192.168.43.139/FaceAttendanceSystem/AndroidAttendance.do";//需要修改地址
         String result = "";
 
         try{
@@ -264,7 +264,7 @@ public class HttpLogin {
 
             //我们请求的数据
             String data = "id="+ URLEncoder.encode(id,"UTF-8")+
-                    "&data="+ URLEncoder.encode(if_success,"UTF-8");
+                    "&if_success="+ URLEncoder.encode(if_success,"UTF-8");
 
             //获取输出流
             OutputStream out = conn.getOutputStream();
