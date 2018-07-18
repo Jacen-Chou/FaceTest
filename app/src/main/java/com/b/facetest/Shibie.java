@@ -247,6 +247,25 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
     };
 
 
+    //考勤打卡新线程   7/18    zj
+    private void SuccessThread(){
+        mFRAbsLoop.over();
+        final String id = pref.getString("id","") ;//cookie获取信息  zj
+        new Thread(new Runnable() {
+            @Override
+            public void run() {//开启线程告知服务器验证通过    zj
+                String result = HttpLogin.If_Arrive(id,"true");
+                Bundle bundle = new Bundle();
+                bundle.putString("result",result);
+                Message msg = new Message();
+                msg.what = IF_ARRIVE;
+                msg.setData(bundle);
+                handler.sendMessage(msg);
+            }
+        }).start();
+    }
+
+
 
     class FRAbsLoop extends AbsLoop {
         AFR_FSDKVersion version = new AFR_FSDKVersion();
@@ -293,25 +312,23 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
 
                 //告知服务器人脸打卡通过功能     7/17     zj
                 if(max > 0.6f){
-                    final String id = pref.getString("id","") ;//cookie获取信息  zj
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {//开启线程告知服务器验证通过    zj
-                            String result = HttpLogin.If_Arrive(id,"true");
-                            Bundle bundle = new Bundle();
-                            bundle.putString("result",result);
-                            Message msg = new Message();
-                            msg.what = IF_ARRIVE;
-                            msg.setData(bundle);
-                            handler.sendMessage(msg);
-                        }
-                    }).start();
+                    SuccessThread();//跳转执行    7/18   zj
+//                    new Handler().postDelayed(new Runnable() {
+//
+//                        @Override
+//                        public void run() {
+//                            //do something
+//                        }
+//                    }, 1000);    //延时1s执行
                    //成功后需要跳出loop   待修改    zj
-                    //。。。。。。。
-                    over();
-
-
                 } else{
+                    new Handler().postDelayed(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            //do something
+                        }
+                    }, 1000);    //延时1s执行
                     Toast.makeText(Shibie.this,"wait...",Toast.LENGTH_SHORT).show();
                 }
                 mImageNV21 = null;

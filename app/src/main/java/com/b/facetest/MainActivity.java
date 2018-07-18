@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Handler;
 
@@ -25,8 +26,8 @@ public class MainActivity extends Activity{
     //cookie功能   7/17     zj
     protected SharedPreferences pref;
     private SharedPreferences.Editor editor;
-    private Button login;
-    private Button register;
+    private TextView login;
+    private TextView register;
     private CheckBox remremberPass;
     //---------------------------------
 
@@ -39,12 +40,12 @@ public class MainActivity extends Activity{
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);//cookie功能   7/17      zj
 
-        login = (Button) findViewById(R.id.login);
-        register = (Button) findViewById(R.id.register);
-        remremberPass = (CheckBox)findViewById(R.id.remember_pass);//cookie   7/17     zj
+        login = (TextView) findViewById(R.id.main_btn_login);
+        register = (TextView) findViewById(R.id.sign_up);
+        remremberPass = (CheckBox)findViewById(R.id.checkBox);//cookie   7/17     zj
 
-        id = (EditText) findViewById(R.id.id);
-        password = (EditText) findViewById(R.id.password);
+        id = (EditText) findViewById(R.id.input_layout_name_id);
+        password = (EditText) findViewById(R.id.input_layout_password);
 
         //cookie 记住密码     7/17    zj
         boolean isRemember = pref.getBoolean("remember_password",false);
