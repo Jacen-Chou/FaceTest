@@ -63,6 +63,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             intent.putExtra("password",psw_1.getText().toString());
                             setResult(ResultCode,intent);//向上一级发送数据
                             finish();
+                        } else if (result.equals("fail")) {
+                            Toast.makeText(RegisterActivity.this,"账号已存在！", Toast.LENGTH_LONG).show();
                         }
                     }catch (NullPointerException e){
                         e.printStackTrace();
