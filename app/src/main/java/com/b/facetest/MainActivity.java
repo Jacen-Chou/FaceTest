@@ -49,11 +49,11 @@ public class MainActivity extends Activity{
 
         //cookie 记住密码     7/17    zj
         boolean isRemember = pref.getBoolean("remember_password",false);
+        String account = pref.getString("id","");
+        id.setText(account);
         if(isRemember){
             //将账号和密码设置到文本框中
-            String account = pref.getString("id","");
             String pass = pref.getString("password","");
-            id.setText(account);
             password.setText(pass);
             remremberPass.setChecked(true);
         }
@@ -121,9 +121,9 @@ public class MainActivity extends Activity{
 
                             //复选框功能   cookie   7/17    zj
                             editor = pref.edit();
+                            editor.putString("id",id.getText().toString());
                             if(remremberPass.isChecked()){//检查复选框是否被选中
                                 editor.putBoolean("remember_password",true);
-                                editor.putString("id",id.getText().toString());
                                 editor.putString("password",password.getText().toString());
                             }else {
                                 editor.clear();
