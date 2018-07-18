@@ -14,6 +14,7 @@ public class AfterLogin extends Shibie{
 
     private Button arrive,cantarr,history,faceregist;
     private final static int IF_FACE_REGIST  = 3;//因为http传输增加参数   handler    7/17   zj
+    private final static int QUERY_MY_HISTORY = 4;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,6 +25,26 @@ public class AfterLogin extends Shibie{
         cantarr = (Button)findViewById(R.id.cant_arr);
         history = (Button)findViewById(R.id.history);
         faceregist = (Button)findViewById(R.id.face_regist);
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String id = pref.getString("id","");
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {//开启线程从服务器确定是否可以注册人脸     zj
+                        String result = HttpLogin.Query_myhistory(id);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("result",result);
+                        Message msg = new Message();
+                        msg.what = QUERY_MY_HISTORY;
+                        msg.setData(bundle);
+                       handler_history.sendMessage(msg);
+                    }
+                }).start();
+
+            }
+        });
 
         arrive.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,4 +112,29 @@ public class AfterLogin extends Shibie{
             }
         }
     };
+    //查询考勤历史数据
+
+    @SuppressLint("HandlerLeak")
+    Handler handler_history = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case QUERY_MY_HISTORY:{
+                    Bundle bundle = new Bundle();
+                    bundle =msg.getData();
+                    String result = bundle.getString("result");
+                    try{
+                        Intent intent = new Intent(AfterLogin.this,QueryMyAtt.class);
+                        intent.putExtra("result",result);
+                        startActivity(intent);
+                    }catch (NullPointerException e){
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            }
+        }
+    };
+
 }
