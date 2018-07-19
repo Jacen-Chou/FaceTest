@@ -1,5 +1,7 @@
 package com.b.facetest;
 
+import net.lemonsoft.lemonbubble.LemonBubble;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -392,7 +394,6 @@ public class HttpLogin {
             out.flush();
             out.close();
             conn.connect();
-
             if (conn.getResponseCode() == 200) {
                 // 获取响应的输入流对象
                 InputStream is = conn.getInputStream();

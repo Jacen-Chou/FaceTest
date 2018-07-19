@@ -6,10 +6,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import net.lemonsoft.lemonbubble.LemonBubble;
 
 public class ForgetActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -41,6 +44,8 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
                     String result = bundle.getString("result");
                     try {
                         if (result.equals("success")) {
+                            LemonBubble.showRight(ForgetActivity.this, "获取密码成功，请前往邮箱查看密码，并尽快修改！", 2000);
+                            //LemonBubble.hide();
                             Intent intent = new Intent();
                             intent.putExtra("id",id.getText().toString());
                             setResult(ResultCode,intent);//向上一级发送数据
@@ -63,18 +68,22 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.forget_do: {
-                if (id.getText().toString() == null) {
-                    Toast.makeText(ForgetActivity.this, "请输入账号！", Toast.LENGTH_LONG).show();
+                System.out.println(id.getText().toString());
+                if (TextUtils.isEmpty(id.getText()) ) {
+                    LemonBubble.showError(ForgetActivity.this, "请输入账号！", 2000);
+                    //Toast.makeText(ForgetActivity.this, "请输入账号！", Toast.LENGTH_LONG).show();
                 } else {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
+                            LemonBubble.showRoundProgress(ForgetActivity.this, "等待中...");
                             String result = HttpLogin.ForgetPassword(id.getText().toString());
                             Bundle bundle = new Bundle();
                             bundle.putString("result", result);
                             Message msg = new Message();
                             msg.what = FORGET_JUDGE;
                             msg.setData(bundle);
+                            LemonBubble.hide();
                             handler_forget.sendMessage(msg);
                         }
                     }).start();

@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Handler;
 
+import net.lemonsoft.lemonbubble.LemonBubble;
+
 public class MainActivity extends Activity{
 
 
