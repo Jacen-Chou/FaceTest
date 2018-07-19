@@ -29,6 +29,7 @@ public class MainActivity extends Activity{
     private TextView login;
     private TextView register;
     private CheckBox remremberPass;
+    private TextView forgetPass;
     //---------------------------------
 
 
@@ -43,6 +44,7 @@ public class MainActivity extends Activity{
         login = (TextView) findViewById(R.id.main_btn_login);
         register = (TextView) findViewById(R.id.sign_up);
         remremberPass = (CheckBox)findViewById(R.id.checkBox);//cookie   7/17     zj
+        forgetPass = (TextView)findViewById(R.id.main_btn_forget); //忘记密码
 
         id = (EditText) findViewById(R.id.input_layout_name_id);
         password = (EditText) findViewById(R.id.input_layout_password);
@@ -91,6 +93,15 @@ public class MainActivity extends Activity{
             }
         });
 
+        //点击忘记密码按钮
+        forgetPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ForgetActivity.class);
+                startActivityForResult(intent,RequestCode);
+            }
+        });
+
 
     }
 
@@ -100,6 +111,10 @@ public class MainActivity extends Activity{
         if(requestCode==1&&resultCode==2){
             id.setText(data.getStringExtra("id"));
             password.setText(data.getStringExtra("password"));
+        }
+        if(requestCode==1&&resultCode==3){
+            id.setText(data.getStringExtra("id"));
+            password.setText("");
         }
     }
     //添加了SuppressLint("HandlerLeak")
