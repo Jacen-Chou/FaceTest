@@ -3,6 +3,8 @@ package com.b.facetest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,14 +46,16 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
                     String result = bundle.getString("result");
                     try {
                         if (result.equals("success")) {
-                            LemonBubble.showRight(ForgetActivity.this, "获取密码成功，请前往邮箱查看密码，并尽快修改！", 2000);
-                            //LemonBubble.hide();
-                            Intent intent = new Intent();
-                            intent.putExtra("id",id.getText().toString());
-                            setResult(ResultCode,intent);//向上一级发送数据
+                            LemonBubble.hide();
+                            //LemonBubble.showRight(ForgetActivity.this, "获取密码成功，请前往邮箱查看密码，并尽快修改！", 2000);
                             Toast.makeText(ForgetActivity.this, "获取密码成功，请前往邮箱查看密码，并尽快修改！", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent();
+                            intent.putExtra("id", id.getText().toString());
+                            setResult(ResultCode, intent);//向上一级发送数据
+                            //Toast.makeText(ForgetActivity.this, "获取密码成功，请前往邮箱查看密码，并尽快修改！", Toast.LENGTH_LONG).show();
                             finish();
                         } else if (result.equals("fail")) {
+                            LemonBubble.hide();
                             Toast.makeText(ForgetActivity.this, "获取密码失败，请检查账号是否正确或是否连接网络！", Toast.LENGTH_LONG).show();
                         }
                     } catch (NullPointerException e) {
@@ -69,27 +73,44 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.forget_do: {
                 System.out.println(id.getText().toString());
-                if (TextUtils.isEmpty(id.getText()) ) {
+                if (TextUtils.isEmpty(id.getText())) {
                     LemonBubble.showError(ForgetActivity.this, "请输入账号！", 2000);
                     //Toast.makeText(ForgetActivity.this, "请输入账号！", Toast.LENGTH_LONG).show();
                 } else {
-                    new Thread(new Runnable() {
+                    HandlerThread handlerThread = new HandlerThread("myHandlerThread");
+                    handlerThread.start();
+                    MyHandler handler = new MyHandler(handlerThread.getLooper());
+                    handler.post(new Runnable() {
+                        //new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            LemonBubble.showRoundProgress(ForgetActivity.this, "等待中...");
+                            //LemonBubble.showRoundProgress(ForgetActivity.this, "等待中...");
                             String result = HttpLogin.ForgetPassword(id.getText().toString());
                             Bundle bundle = new Bundle();
                             bundle.putString("result", result);
                             Message msg = new Message();
                             msg.what = FORGET_JUDGE;
                             msg.setData(bundle);
-                            LemonBubble.hide();
                             handler_forget.sendMessage(msg);
                         }
-                    }).start();
+                    });
+                    //}).start();
                 }
             }
             break;
+        }
+    }
+
+    class MyHandler extends Handler {
+
+        public MyHandler(Looper looper) {
+            super(looper);
+            LemonBubble.showRoundProgress(ForgetActivity.this, "等待中...");
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            LemonBubble.showRoundProgress(ForgetActivity.this, "等待中...");
         }
     }
 }
