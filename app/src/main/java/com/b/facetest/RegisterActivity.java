@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Handler;
 
+import java.util.regex.Pattern;
+
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -81,7 +83,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.register_do:{
                 if( ! psw_1.getText().toString().equals(psw_2.getText().toString())){
                     Toast.makeText(RegisterActivity.this,"两次密码不一致！",Toast.LENGTH_LONG).show();
-                }else {
+                } else if (!Pattern.matches("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$", email.getText().toString())) {
+                    Toast.makeText(RegisterActivity.this,"输入邮箱错误！",Toast.LENGTH_LONG).show();
+                } else {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
