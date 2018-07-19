@@ -12,7 +12,7 @@ import java.net.URLEncoder;
 public class HttpLogin {
 
     public static String LoginByPost(String id,String password){
-        String address = "http://192.168.43.139/FaceAttendanceSystem/AndroidLogin.do";
+        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidLogin.do";
         String result = "";
         try{
             URL url = new URL(address);//初始化URL
@@ -70,7 +70,7 @@ public class HttpLogin {
     }
 
     public static String RegisterByPost(String id,String name,String password,String email){
-        String address = "http://192.168.43.139/FaceAttendanceSystem/AndroidStuRegister.do";
+        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidStuRegister.do";
         String result = "";
 
         try{
@@ -131,7 +131,7 @@ public class HttpLogin {
     }
 
     public static String FaceRegistByPost(String id,String password,String if_data){
-        String address = "http://192.168.43.139/FaceAttendanceSystem/AndroidRegisterFace.do";
+        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidRegisterFace.do";
         String result = "";
 
         try{
@@ -190,7 +190,7 @@ public class HttpLogin {
     }
 
     public static String If_Face(String id){
-        String address = "http://192.168.43.139/FaceAttendanceSystem/AndroidIfRegisterFace.do";
+        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidIfRegisterFace.do";
         String result = "";
 
         try{
@@ -247,7 +247,7 @@ public class HttpLogin {
     }
 
     public static String If_Arrive(String id,String if_success){
-        String address = "http://192.168.43.139/FaceAttendanceSystem/AndroidAttendance.do";//需要修改地址
+        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidAttendance.do";//需要修改地址
         String result = "";
 
         try{
@@ -306,7 +306,7 @@ public class HttpLogin {
 
 
     public static String Query_myhistory(String id){
-        String address = "http://192.168.43.139/FaceAttendanceSystem/AndroidQueryAllAttById.do";//需要修改地址
+        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidQueryAllAttById.do";//需要修改地址
         String result = "";
 
         try{

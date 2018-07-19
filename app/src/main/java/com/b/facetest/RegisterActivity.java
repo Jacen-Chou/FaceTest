@@ -1,6 +1,8 @@
 package com.b.facetest;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Handler;
 
@@ -18,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private int ResultCode = 2;
     private final static int REGISTER_JUDGE = 2;
-    private Button register,back;
+    private TextView register,back;
     private EditText id,name,psw_1,psw_2,email;
 
     @Override
@@ -26,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        register = (Button) findViewById(R.id.register_do);
+        register = (TextView) findViewById(R.id.register_do);
         register.setOnClickListener(this);
         id = (EditText) findViewById(R.id.id_edit);
         name = (EditText)findViewById(R.id.name_edit);
@@ -34,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         psw_2 = (EditText) findViewById(R.id.password_edit_1);
         email = (EditText) findViewById(R.id.email_edit);
 
-        back = (Button)findViewById(R.id.back_edit);//zj  返回MainActivity
+        back = (TextView) findViewById(R.id.back_edit);//zj  返回MainActivity
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,19 +89,36 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 } else if (!Pattern.matches("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$", email.getText().toString())) {
                     Toast.makeText(RegisterActivity.this,"输入邮箱错误！",Toast.LENGTH_LONG).show();
                 } else {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            String result = HttpLogin.RegisterByPost(id.getText().toString(),name.getText().toString(),
-                                    psw_1.getText().toString(),email.getText().toString());
-                            Bundle bundle = new Bundle();
-                            bundle.putString("result",result);
-                            Message msg = new Message();
-                            msg.what = REGISTER_JUDGE;
-                            msg.setData(bundle);
-                            handler.sendMessage(msg);
-                        }
-                    }).start();
+                    new AlertDialog.Builder(RegisterActivity.this)
+                            .setTitle("提示")//注释拍照完成后需要输入名称
+                            //.setIcon(android.R.drawable.ic_dialog_info)
+                            //.setView(layout)
+                            .setMessage("学号唯一标识且邮箱用于密码找回！确定提交？")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            String result = HttpLogin.RegisterByPost(id.getText().toString(),name.getText().toString(),
+                                                    psw_1.getText().toString(),email.getText().toString());
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("result",result);
+                                            Message msg = new Message();
+                                            msg.what = REGISTER_JUDGE;
+                                            msg.setData(bundle);
+                                            handler.sendMessage(msg);
+                                        }
+                                    }).start();
+                                }
+                            })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
                 }
             }
             break;

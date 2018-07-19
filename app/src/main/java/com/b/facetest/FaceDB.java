@@ -34,10 +34,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class FaceDB extends HttpServlet {
+public class FaceDB extends MainActivity {
 	private final String TAG = this.getClass().toString();
-	private static String Url,filepath;
-
+//	private static String Url,filepath;
+//	private final String id = pref.getString("id","");
 
 	public static String appid = "Byegb1f3kuthwQmD6hcfp8WHVewxohnX5Lb8Lza5jo3q";
 	public static String ft_key = "FsfhC1wjGjMVy23q2o7DtU5s1D34fcSL3Ee7m2Ntq7Em";//人脸追踪
@@ -64,7 +64,6 @@ public class FaceDB extends HttpServlet {
 
 	public FaceDB(String path) {
 		mDBPath = path;
-
 		mRegister = new ArrayList<>();
 		mFRVersion = new AFR_FSDKVersion();
 		mUpgrade = false;
@@ -180,23 +179,29 @@ public class FaceDB extends HttpServlet {
 		if (loadInfo()) {
 			try {
 				for (FaceRegist face : mRegister) {
-					Log.d(TAG, "load name:" + face.mName + "'s face feature data.");
-					FileInputStream fs = new FileInputStream(mDBPath + "/" + face.mName + ".data");
-					ExtInputStream bos = new ExtInputStream(fs);
-					AFR_FSDKFace afr = null;
-					do {
-						if (afr != null) {
-							if (mUpgrade) {
-								//upgrade data.
+//					if(face.mName.equals(id)){
+						Log.d(TAG, "load name:" + face.mName + "'s face feature data.");
+						FileInputStream fs = new FileInputStream(mDBPath + "/" + face.mName + ".data");
+						ExtInputStream bos = new ExtInputStream(fs);
+						AFR_FSDKFace afr = null;
+						do {
+							if (afr != null) {
+								if (mUpgrade) {
+									//upgrade data.
+								}
+								face.mFaceList.add(afr);
 							}
-							face.mFaceList.add(afr);
-						}
-						afr = new AFR_FSDKFace();
-					} while (bos.readBytes(afr.getFeatureData()));
-					//数据文件
-					bos.close();
-					fs.close();
-					Log.d(TAG, "load name: size = " + face.mFaceList.size());
+							afr = new AFR_FSDKFace();
+						} while (bos.readBytes(afr.getFeatureData()));
+						//数据文件
+						bos.close();
+						fs.close();
+						Log.d(TAG, "load name: size = " + face.mFaceList.size());
+
+//					}
+//					else{
+//						System.out.println("id  !=  data");
+//					}
 				}
 				return true;
 			} catch (IOException e) {
