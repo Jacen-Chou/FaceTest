@@ -9,17 +9,24 @@ import android.widget.Button;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
+import android.os.Bundle;
+import java.io.File;
 
 public class AfterLogin extends Shibie{
 
     private Button arrive,cantarr,history,faceregist;
     private final static int IF_FACE_REGIST  = 3;//因为http传输增加参数   handler    7/17   zj
     private final static int QUERY_MY_HISTORY = 4;
+    private final static int CHECK_FACE_FILE = 5;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_afterlogin);
+
+        final String id = pref.getString("id","");
+        @SuppressLint("SdCardPath") final String file_url = "/sdcard/FaceTestMine/"+id+".data";
+        System.out.println(file_url);
 
         arrive = (Button)findViewById(R.id.arrive);
         cantarr = (Button)findViewById(R.id.cant_arr);
@@ -49,8 +56,27 @@ public class AfterLogin extends Shibie{
         arrive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfterLogin.this,Shibie.class);
-                startActivity(intent);
+                if(fileIsExists(file_url)){
+//                    Toast.makeText(AfterLogin.this,"存在",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AfterLogin.this,Shibie.class);
+                    startActivity(intent);
+                }else{
+//                    Toast.makeText(AfterLogin.this,"不存在",Toast.LENGTH_SHORT).show();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {//开启线程从服务器确定是否可以注册人脸     zj
+                            String result = HttpLogin.If_Face(id);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("result",result);
+                            Message msg = new Message();
+                            msg.what = CHECK_FACE_FILE;
+                            msg.setData(bundle);
+                            check_file.sendMessage(msg);
+                        }
+                    }).start();
+                }
+
+
             }
         });
 
@@ -59,7 +85,7 @@ public class AfterLogin extends Shibie{
             public void onClick(View v) {
                 //camera.release();
                 //camera = null;//   error
-                final String id = pref.getString("id","") ;//cookie获取信息  zj
+//                final String id = pref.getString("id","") ;//cookie获取信息  zj
                 new Thread(new Runnable() {
                     @Override
                     public void run() {//开启线程从服务器确定是否可以注册人脸     zj
@@ -136,5 +162,53 @@ public class AfterLogin extends Shibie{
             }
         }
     };
+
+    @SuppressLint("HandlerLeak")
+    Handler check_file = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case CHECK_FACE_FILE:{
+                    Bundle bundle = new Bundle();
+                    bundle = msg.getData();
+                    String result = bundle.getString("result");
+                    try {
+                        if (result.equals("success")) {
+                            Toast.makeText(AfterLogin.this,"请先注册人脸数据",Toast.LENGTH_SHORT).show();
+
+                        }else{
+                            Toast.makeText(AfterLogin.this,"请再次注册人脸数据",Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (NullPointerException e){
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            }
+        }
+    };
+
+
+
+
+    //判断文件是否存在方法     7/19    zj
+    public boolean fileIsExists(String strFile)
+    {
+        try
+        {
+            File f=new File(strFile);
+            if(!f.exists())
+            {
+                return false;
+            }
+
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        return true;
+    }
 
 }

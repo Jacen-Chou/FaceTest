@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Handler;
 
+
 import net.lemonsoft.lemonbubble.LemonBubble;
 
 public class MainActivity extends Activity{
@@ -42,6 +43,8 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);//cookie功能   7/17      zj
