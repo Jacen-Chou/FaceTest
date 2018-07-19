@@ -161,7 +161,7 @@ public class Register extends MainActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
-                                    //finish();//添加测试的，不确定。回到AfterLogin界面   zj
+                                    finish();//添加测试的，不确定。回到AfterLogin界面   zj
                                 }
                             })
                             .show();

@@ -18,6 +18,9 @@ import android.os.Handler;
 
 public class MainActivity extends Activity{
 
+
+    //我随便加一句注释
+
 //    Button login,register;
     private EditText id,password;
     private final static int LOGIN_JUDGE = 1;
