@@ -85,7 +85,7 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shibie);
 
-        tv_name = findViewById(R.id.name);
+        //tv_name = findViewById(R.id.name);
         surfaceView = findViewById(R.id.surfaceView);
         surfaceHolder = surfaceView.getHolder();
 
@@ -224,18 +224,17 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
                     String result = bundle.getString("result");
                     //Toast.makeText(MainActivity.this,result,Toast.LENGTH_SHORT).show();
                     try {
-                        if (result.equals("success")) {
-                            new AlertDialog.Builder(Shibie.this)
-                                    //.setTitle(" ")
-                                    .setMessage("打卡考勤成功")
-                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            finish();
-                                        }
-                                    })
-                                    .show();
-
+                        if (result.equals("success")) {//打卡成功显示，展示两秒自动退出
+                            final AlertDialog alert = new AlertDialog.Builder(Shibie.this).create();
+                            alert.setMessage("打卡考勤成功");
+                            alert.show();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    alert.dismiss();
+                                    finish();
+                                }
+                            }, 2000);
                         }
                     }catch (NullPointerException e){
                         e.printStackTrace();
@@ -247,23 +246,23 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
     };
 
 
-    //考勤打卡新线程   7/18    zj
-    private void SuccessThread(){
-        mFRAbsLoop.over();
-        final String id = pref.getString("id","") ;//cookie获取信息  zj
-        new Thread(new Runnable() {
-            @Override
-            public void run() {//开启线程告知服务器验证通过    zj
-                String result = HttpLogin.If_Arrive(id,"true");
-                Bundle bundle = new Bundle();
-                bundle.putString("result",result);
-                Message msg = new Message();
-                msg.what = IF_ARRIVE;
-                msg.setData(bundle);
-                handler.sendMessage(msg);
-            }
-        }).start();
-    }
+//    //考勤打卡新线程   7/18    zj
+//    private void SuccessThread(){
+//        mFRAbsLoop.over();
+//        final String id = pref.getString("id","") ;//cookie获取信息  zj
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {//开启线程告知服务器验证通过    zj
+//                String result = HttpLogin.If_Arrive(id,"true");
+//                Bundle bundle = new Bundle();
+//                bundle.putString("result",result);
+//                Message msg = new Message();
+//                msg.what = IF_ARRIVE;
+//                msg.setData(bundle);
+//                handler.sendMessage(msg);
+//            }
+//        }).start();
+//    }
 
 
 
@@ -312,25 +311,24 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
 
                 //告知服务器人脸打卡通过功能     7/17     zj
                 if(max > 0.6f){
-                    SuccessThread();//跳转执行    7/18   zj
-//                    new Handler().postDelayed(new Runnable() {
-//
-//                        @Override
-//                        public void run() {
-//                            //do something
-//                        }
-//                    }, 1000);    //延时1s执行
-                   //成功后需要跳出loop   待修改    zj
-                } else{
-                    new Handler().postDelayed(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            //do something
-                        }
-                    }, 1000);    //延时1s执行
-                    Toast.makeText(Shibie.this,"wait...",Toast.LENGTH_SHORT).show();
+//                    SuccessThread();//跳转执行    7/18   zj
+                    //考勤成功处理修改    7/19      zj
+                    final String id = pref.getString("id","") ;//cookie获取信息  zj
+                    String result = HttpLogin.If_Arrive(id,"true");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("result",result);
+                    Message msg = new Message();
+                    msg.what = IF_ARRIVE;
+                    msg.setData(bundle);
+                    handler.sendMessage(msg);
+                    try{
+                        Thread.sleep(2100);//延时2100，防止多次提交   7/19   zj
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
+//                else{//识别不成功提示，延时
+//                }
                 mImageNV21 = null;
 //              ********************
 
