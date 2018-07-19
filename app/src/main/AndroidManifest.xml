@@ -28,7 +28,8 @@
         <activity android:name=".AfterLogin" />
         <activity android:name=".Shibie" />
         <activity android:name=".Register" />
-        <activity android:name=".QueryMyAtt"></activity>
+        <activity android:name=".QueryMyAtt" />
+        <activity android:name=".ForgetActivity"></activity>
     </application>
 
 </manifest>

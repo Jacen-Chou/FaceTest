@@ -45,9 +45,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-
     }
-
 
     //添加了SuppressLint("HandlerLeak")
     @SuppressLint("HandlerLeak")
