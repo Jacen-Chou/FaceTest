@@ -27,12 +27,12 @@ public class AskForLeaveActivity extends Activity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_for_leave);
 
-        selectTime = (RelativeLayout) findViewById(R.id.selectTime);
+        //selectTime = (RelativeLayout) findViewById(R.id.selectTime);
         selectTime.setOnClickListener(this);
         selectDate = (RelativeLayout) findViewById(R.id.selectDate);
         selectDate.setOnClickListener(this);
         currentDate = (TextView) findViewById(R.id.currentDate);
-        currentTime = (TextView) findViewById(R.id.currentTime);
+        //currentTime = (TextView) findViewById(R.id.currentTime);
 
         initDatePicker();
     }
@@ -45,10 +45,10 @@ public class AskForLeaveActivity extends Activity implements View.OnClickListene
                 customDatePicker1.show(currentDate.getText().toString());
                 break;
 
-            case R.id.selectTime:
+            //case R.id.selectTime:
                 // 日期格式为yyyy-MM-dd HH:mm
-                customDatePicker2.show(currentTime.getText().toString());
-                break;
+                //customDatePicker2.show(currentTime.getText().toString());
+                //break;
         }
     }
 
