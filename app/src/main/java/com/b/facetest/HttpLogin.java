@@ -166,13 +166,15 @@ public class HttpLogin {
      * @param if_success
      * @return
      */
-    public static String If_Arrive(String id, String if_success) {
+
+    public static String If_Arrive(String id, String if_success,String IP) {
         String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidAttendance.do";//需要修改地址
         String result = "";
         String data = null;
         try {
             data = "id=" + encode(id, "UTF-8") +
-                    "&if_success=" + encode(if_success, "UTF-8");
+                    "&if_success=" + encode(if_success, "UTF-8")+
+                    "&IP="+encode(IP,"UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

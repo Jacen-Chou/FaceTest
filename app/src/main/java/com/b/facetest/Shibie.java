@@ -237,6 +237,18 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
                                 }
                             }, 2000);
                         }
+                        else if(result.equals("ip_error")){
+                            final AlertDialog alert = new AlertDialog.Builder(Shibie.this).create();
+                            alert.setMessage("位置错误，请重试");
+                            alert.show();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    alert.dismiss();
+                                    finish();
+                                }
+                            }, 2000);
+                        }
                     }catch (NullPointerException e){
                         e.printStackTrace();
                     }
@@ -315,7 +327,8 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
 //                    SuccessThread();//跳转执行    7/18   zj
                     //考勤成功处理修改    7/19      zj
                     final String id = pref.getString("id","") ;//cookie获取信息  zj
-                    String result = HttpLogin.If_Arrive(id,"true");
+                    String IP = IpUtil.getIP(getApplicationContext());
+                    String result = HttpLogin.If_Arrive(id,"true",IP);
                     Bundle bundle = new Bundle();
                     bundle.putString("result",result);
                     Message msg = new Message();
