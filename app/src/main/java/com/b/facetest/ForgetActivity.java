@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
@@ -20,7 +21,7 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
 
     private int ResultCode = 3;
     private final static int FORGET_JUDGE = 3;
-    private Button forget;
+    private TextView forget;
     private EditText id;
 
     @Override
@@ -29,7 +30,7 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_forget);
 
         id = (EditText) findViewById(R.id.forget_id);
-        forget = (Button) findViewById(R.id.forget_do);
+        forget = (TextView) findViewById(R.id.forget_do);
         forget.setOnClickListener(this);
     }
 

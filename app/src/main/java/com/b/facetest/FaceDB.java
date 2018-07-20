@@ -142,7 +142,7 @@ public class FaceDB extends MainActivity{
 				for (int i=0; i<GetFile.size();i++){
 					System.out.println(GetFile.get(i));
 					if (new File(mDBPath + "/" + GetFile.get(i) + ".data").exists()&&id_name.equals(GetFile.get(i))) {
-						System.out.println("gggg===="+GetFile.get(i));
+//						System.out.println("gggg===="+GetFile.get(i));
 						mRegister.add(new FaceRegist(new String(GetFile.get(i))));
 					}
 				}
