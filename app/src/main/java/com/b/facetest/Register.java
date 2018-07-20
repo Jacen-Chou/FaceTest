@@ -263,9 +263,7 @@ public class Register extends MainActivity {
             }
             //销毁人脸检测引擎
             err = engine.AFD_FSDK_UninitialFaceEngine();
-            System.out.println("aaaa");
         }
-        System.out.println("bbbb");
     }
     private String getPath(Uri uri) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

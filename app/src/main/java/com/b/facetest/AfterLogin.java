@@ -26,7 +26,7 @@ public class AfterLogin extends Shibie{
 
         final String id = pref.getString("id","");
         @SuppressLint("SdCardPath") final String file_url = "/sdcard/FaceTestMine/"+id+".data";
-        System.out.println(file_url);
+//        System.out.println(file_url);
 
         arrive = (Button)findViewById(R.id.arrive);
         cantarr = (Button)findViewById(R.id.cant_arr);

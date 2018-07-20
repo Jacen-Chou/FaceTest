@@ -1,5 +1,6 @@
 package com.b.facetest;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -34,10 +35,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class FaceDB extends MainActivity {
+public class FaceDB extends MainActivity{
 	private final String TAG = this.getClass().toString();
 //	private static String Url,filepath;
-//	private final String id = pref.getString("id","");
+
 
 	public static String appid = "Byegb1f3kuthwQmD6hcfp8WHVewxohnX5Lb8Lza5jo3q";
 	public static String ft_key = "FsfhC1wjGjMVy23q2o7DtU5s1D34fcSL3Ee7m2Ntq7Em";//人脸追踪
@@ -45,6 +46,7 @@ public class FaceDB extends MainActivity {
 	public static String fr_key = "FsfhC1wjGjMVy23q2o7DtU67L1ZSYkrbUZun5ZzeD6th";//人脸识别
 	public static String age_key = "FsfhC1wjGjMVy23q2o7DtU6j91sLjzk9XdivjZvM1BeV";//年龄识别
 	public static String gender_key = "FsfhC1wjGjMVy23q2o7DtU6rJR8W3U3YoxARdnF1em63";//性别识别
+	private final String file_url = "/sdcard/FaceTestMine/";
 
 	String mDBPath;
 	List<FaceRegist> mRegister;
@@ -99,6 +101,24 @@ public class FaceDB extends MainActivity {
 		return false;
 	}
 
+	// 获取当前目录下所有的data文件
+	public static ArrayList<String > GetFileName(String fileAbsolutePath) {
+		ArrayList<String> vecFile = new ArrayList<String>();
+		File file = new File(fileAbsolutePath);
+		File[] subFile = file.listFiles();
+
+		for (int iFileLength = 0; iFileLength < subFile.length; iFileLength++) {
+			// 判断是否为文件夹
+			if (!subFile[iFileLength].isDirectory()) {
+				String filename = subFile[iFileLength].getName();
+				// 判断是否为.data结尾
+				if (filename.trim().toLowerCase().endsWith(".data")) {
+					vecFile.add(filename.substring(0,8));
+				}
+			}
+		}
+		return vecFile;
+	}
 
 
 	private boolean loadInfo() {
@@ -110,17 +130,23 @@ public class FaceDB extends MainActivity {
 			ExtInputStream bos = new ExtInputStream(fs);
 			//load version
 			String version_saved = bos.readString();
+			ArrayList<String>GetFile = GetFileName(file_url);
+
+
 			if (version_saved.equals(mFRVersion.toString() + "," + mFRVersion.getFeatureLevel())) {
 				mUpgrade = true;
 			}
 			//load all regist name.
-			if (version_saved != null) {
-				for (String name = bos.readString(); name != null; name = bos.readString()){
-					if (new File(mDBPath + "/" + name + ".data").exists()) {
-						mRegister.add(new FaceRegist(new String(name)));
+//			if (version_saved != null) {
+				//约束文件为当前用户文件     7/20  zj
+				for (int i=0; i<GetFile.size();i++){
+					System.out.println(GetFile.get(i));
+					if (new File(mDBPath + "/" + GetFile.get(i) + ".data").exists()&&id_name.equals(GetFile.get(i))) {
+						System.out.println("gggg===="+GetFile.get(i));
+						mRegister.add(new FaceRegist(new String(GetFile.get(i))));
 					}
 				}
-			}
+//			}
 			bos.close();
 			fs.close();
 			return true;
