@@ -110,7 +110,7 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
 
         @Override
         public void handleMessage(Message msg) {
-            LemonBubble.showRoundProgress(ForgetActivity.this, "等待中...");
+            //LemonBubble.showRoundProgress(ForgetActivity.this, "等待中...");
         }
     }
 }
