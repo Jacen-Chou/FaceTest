@@ -2,171 +2,129 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color1"
+    android:background="#A4D3EE"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/color1"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_title"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_marginTop="14dip"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/leasing" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="15dp"
-            android:background="@null"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
             android:gravity="center"
-            android:text="@string/select_date"
-            android:textColor="@color/color3"
-            android:textSize="15sp" />
+            android:text="请假单填写"
+            android:textColor="#ffffff"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/selectDate"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/color2"
-        android:gravity="center_vertical">
+        android:layout_height="wrap_content"
+        android:background="@drawable/radius_drawable_bg"
+        android:orientation="vertical"
+        android:layout_margin="20dip"
+        android:padding="10dip" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/Starttime" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="15dp"
-            android:background="@null"
-            android:gravity="center"
-            android:text="@string/current_date"
-            android:textColor="@color/color4"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/currentDate"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:background="@null"
-            android:gravity="center"
-            android:paddingEnd="15dp"
-            android:paddingStart="15dp"
-            android:textColor="@color/color5"
-            android:textSize="15sp" />
-
-    </RelativeLayout>
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:background="@color/color1"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginStart="15dp"-->
-            <!--android:background="@null"-->
-            <!--android:gravity="center"-->
-            <!--android:text="@string/select_time"-->
-            <!--android:textColor="@color/color3"-->
-            <!--android:textSize="15sp" />-->
-
-    <!--</LinearLayout>-->
-
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/selectTime"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:background="@color/color2"-->
-        <!--android:gravity="center_vertical">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginStart="15dp"-->
-            <!--android:background="@null"-->
-            <!--android:gravity="center"-->
-            <!--android:text="@string/current_time"-->
-            <!--android:textColor="@color/color4"-->
-            <!--android:textSize="15sp" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/currentTime"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:background="@null"-->
-            <!--android:gravity="center"-->
-            <!--android:paddingEnd="15dp"-->
-            <!--android:paddingStart="15dp"-->
-            <!--android:textColor="@color/color5"-->
-            <!--android:textSize="15sp" />-->
-
-    <!--</RelativeLayout>-->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/color1"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
-
-        <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="15dp"
-        android:background="@null"
-        android:gravity="center"
-        android:text="请假天数"
-        android:textColor="@color/color3"
-        android:textSize="15sp" />
+            <TextView
+                android:id="@+id/currentDate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-4dip"
+                android:layout_alignParentEnd="true"
+                android:paddingStart="8dp"
+                android:text="开始时间"
+                android:textColor="#dbdbdb"
+                android:textSize="21sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#eeeeee" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/days" />
+            <TextView
+                android:id="@+id/days"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-4dip"
+                android:paddingStart="8dp"
+                android:text="请假天数"
+                android:textColor="#dbdbdb"
+                android:textSize="21sp" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/color1"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:background="@drawable/radius_drawable_bg"
+        android:orientation="vertical"
+        android:layout_margin="20dip"
+        android:padding="10dip" >
 
         <EditText
-            android:id="@+id/days"
-            android:layout_width="208dp"
-            android:layout_height="wrap_content"
-            android:hint="" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="天"/>
-
+            android:id="@+id/reason"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginLeft="2dip"
+            android:background="#00000000"
+            android:hint="请假理由"
+            android:gravity="top"
+            android:padding="5dip"
+            android:textSize="21sp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/color1"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="15dp"
-            android:background="@null"
-            android:gravity="center"
-            android:text="请假理由"
-            android:textColor="@color/color3"
-            android:textSize="15sp" />
-
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/reason"
-        android:hint="理由"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
+    <TextView
+        android:id="@+id/ask_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dip"
+        android:background="@drawable/text_bg"
+        android:gravity="center"
+        android:paddingBottom="4dip"
+        android:paddingLeft="19dip"
+        android:paddingRight="19dip"
+        android:paddingTop="4dip"
+        android:text="提交申请"
+        android:textColor="#ffffff"
+        android:textSize="22sp" />
 </LinearLayout>
+
+
+
+
+
+
