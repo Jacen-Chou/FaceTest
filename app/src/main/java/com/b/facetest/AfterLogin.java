@@ -64,8 +64,8 @@ public class AfterLogin extends Shibie{
 //                    Toast.makeText(AfterLogin.this,"不存在",Toast.LENGTH_SHORT).show();
                     new Thread(new Runnable() {
                         @Override
-                        public void run() {//开启线程从服务器确定是否可以注册人脸     zj
-                            String result = HttpLogin.If_Face(id);
+                        public void run() {
+                            String result = HttpLogin.If_Face(id,"2");
                             Bundle bundle = new Bundle();
                             bundle.putString("result",result);
                             Message msg = new Message();
@@ -89,7 +89,7 @@ public class AfterLogin extends Shibie{
                 new Thread(new Runnable() {
                     @Override
                     public void run() {//开启线程从服务器确定是否可以注册人脸     zj
-                        String result = HttpLogin.If_Face(id);
+                        String result = HttpLogin.If_Face(id,"1");
                         Bundle bundle = new Bundle();
                         bundle.putString("result",result);
                         Message msg = new Message();
