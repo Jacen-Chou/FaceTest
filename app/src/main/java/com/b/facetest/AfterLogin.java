@@ -24,29 +24,31 @@ public class AfterLogin extends Shibie{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_afterlogin);
 
+
         final String id = pref.getString("id","");
         @SuppressLint("SdCardPath") final String file_url = "/sdcard/FaceTestMine/"+id+".data";
-        System.out.println(file_url);
+//        System.out.println(file_url);
 
-        arrive = (Button)findViewById(R.id.arrive);
-        cantarr = (Button)findViewById(R.id.cant_arr);
-        history = (Button)findViewById(R.id.history);
-        faceregist = (Button)findViewById(R.id.face_regist);
+
+        arrive = (Button) findViewById(R.id.arrive);
+        cantarr = (Button) findViewById(R.id.cant_arr);
+        history = (Button) findViewById(R.id.history);
+        faceregist = (Button) findViewById(R.id.face_regist);
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String id = pref.getString("id","");
+                final String id = pref.getString("id", "");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {//开启线程从服务器确定是否可以注册人脸     zj
                         String result = HttpLogin.Query_myhistory(id);
                         Bundle bundle = new Bundle();
-                        bundle.putString("result",result);
+                        bundle.putString("result", result);
                         Message msg = new Message();
                         msg.what = QUERY_MY_HISTORY;
                         msg.setData(bundle);
-                       handler_history.sendMessage(msg);
+                        handler_history.sendMessage(msg);
                     }
                 }).start();
 
@@ -56,18 +58,18 @@ public class AfterLogin extends Shibie{
         arrive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(fileIsExists(file_url)){
+                if (fileIsExists(file_url)) {
 //                    Toast.makeText(AfterLogin.this,"存在",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AfterLogin.this,Shibie.class);
+                    Intent intent = new Intent(AfterLogin.this, Shibie.class);
                     startActivity(intent);
-                }else{
+                } else {
 //                    Toast.makeText(AfterLogin.this,"不存在",Toast.LENGTH_SHORT).show();
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            String result = HttpLogin.If_Face(id,"2");
+                            String result = HttpLogin.If_Face(id, "2");
                             Bundle bundle = new Bundle();
-                            bundle.putString("result",result);
+                            bundle.putString("result", result);
                             Message msg = new Message();
                             msg.what = CHECK_FACE_FILE;
                             msg.setData(bundle);
@@ -89,9 +91,9 @@ public class AfterLogin extends Shibie{
                 new Thread(new Runnable() {
                     @Override
                     public void run() {//开启线程从服务器确定是否可以注册人脸     zj
-                        String result = HttpLogin.If_Face(id,"1");
+                        String result = HttpLogin.If_Face(id, "1");
                         Bundle bundle = new Bundle();
-                        bundle.putString("result",result);
+                        bundle.putString("result", result);
                         Message msg = new Message();
                         msg.what = IF_FACE_REGIST;
                         msg.setData(bundle);
@@ -105,6 +107,16 @@ public class AfterLogin extends Shibie{
 //                startActivity(intent);
             }
         });
+
+
+        cantarr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLogin.this, AskForLeaveActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

@@ -30,6 +30,7 @@
         <activity android:name=".Register" />
         <activity android:name=".QueryMyAtt" />
         <activity android:name=".ForgetActivity"></activity>
+        <activity android:name=".AskForLeaveActivity"></activity>
     </application>
 
 </manifest>

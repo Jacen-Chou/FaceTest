@@ -20,10 +20,6 @@ import android.os.Handler;
 import net.lemonsoft.lemonbubble.LemonBubble;
 
 public class MainActivity extends Activity{
-
-
-    //我随便加一句注释
-
 //    Button login,register;
     private EditText id,password;
     private final static int LOGIN_JUDGE = 1;
@@ -36,6 +32,7 @@ public class MainActivity extends Activity{
     private TextView register;
     private CheckBox remremberPass;
     private TextView forgetPass;
+    protected static String id_name="";
     //---------------------------------
 
 
@@ -145,6 +142,7 @@ public class MainActivity extends Activity{
                             //复选框功能   cookie   7/17    zj
                             editor = pref.edit();
                             editor.putString("id",id.getText().toString());
+                            id_name = id.getText().toString();
                             if(remremberPass.isChecked()){//检查复选框是否被选中
                                 editor.putBoolean("remember_password",true);
                                 editor.putString("password",password.getText().toString());

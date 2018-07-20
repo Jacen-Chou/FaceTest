@@ -2,35 +2,116 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#A4D3EE"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="请输入你的账号，系统将自动向您的注册邮箱发送初始密码"
-        android:textSize="14sp"
-        android:layout_marginTop="30sp"/>
-
-    <EditText
-        android:id="@+id/forget_id"
-        android:hint="账号"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/forget_do"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_title"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/forget_do"
-            android:text="获取初始密码"
-            android:layout_weight="0.5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="35dip"
+            android:layout_height="35dip"
+            android:layout_marginTop="8dip"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/paw_reset" />
 
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:gravity="center"
+            android:text="重置密码"
+            android:textColor="#ffffff"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:layout_marginTop="10dip"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="输入你的账号后系统将自动向您的注册邮箱发送初始密码"
+            android:textColor="#ffffff"
+            android:textSize="17sp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:background="@drawable/radius_drawable_bg"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <LinearLayout
+            android:id="@+id/input_layout_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/paw_code" />
+
+            <EditText
+                android:id="@+id/forget_id"
+                android:lines="1"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:background="#00000000"
+                android:hint="学号"
+                android:padding="5dip"
+                android:textSize="16sp" />
+        </LinearLayout>
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/forget_do"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dip"
+        android:background="@drawable/text_bg"
+        android:gravity="center"
+        android:paddingBottom="4dip"
+        android:paddingLeft="19dip"
+        android:paddingRight="19dip"
+        android:paddingTop="4dip"
+        android:text="获取初始密码"
+        android:textColor="#ffffff"
+        android:textSize="22sp" />
 </LinearLayout>
+
+
+    <!--<EditText-->
+        <!--android:id="@+id/forget_id"-->
+        <!--android:hint="账号"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/forget_do"-->
+        <!--android:layout_marginTop="20dp">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/forget_do"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="0.5"-->
+            <!--android:text="获取初始密码" />-->
+
+    <!--</LinearLayout>-->
+
+

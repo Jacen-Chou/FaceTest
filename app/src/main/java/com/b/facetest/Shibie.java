@@ -97,6 +97,7 @@ public class Shibie extends MainActivity implements SurfaceHolder.Callback {
         }
         mFaceDB = new FaceDB(file.getPath());
 
+
         mFaceDB.loadFaces();
 
         System.out.println("mRegister的 长度:" + mFaceDB.mRegister.size());
