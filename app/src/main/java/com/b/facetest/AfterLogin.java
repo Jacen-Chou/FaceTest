@@ -61,6 +61,9 @@ public class AfterLogin extends Shibie{
             }
         });
 
+        /**
+         * 考勤
+         */
         arrive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
