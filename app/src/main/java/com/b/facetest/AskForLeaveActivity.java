@@ -3,12 +3,17 @@ package com.b.facetest;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.RelativeLayout;
+import android.app.AlertDialog;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
         import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.b.facetest.widget.CustomDatePicker;
+import com.b.facetest.widget.CustomDatePicker;
 
         import java.text.SimpleDateFormat;
         import java.util.Date;
@@ -17,11 +22,15 @@ import android.app.Activity;
 /**
  * Created by liuwan on 2016/9/28.
  */
-public class AskForLeaveActivity extends Activity implements View.OnClickListener {
+public class AskForLeaveActivity extends MainActivity{
 
     private RelativeLayout selectDate, selectTime;
-    private TextView currentDate, currentTime;
+    private TextView currentDate, currentTime, Reason;
+    private TextView ask_submit;
+
     private CustomDatePicker customDatePicker1, customDatePicker2;
+    private String Leave_id = "";
+    private final static int ASK_FOR_LEAVE = 9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,28 +39,46 @@ public class AskForLeaveActivity extends Activity implements View.OnClickListene
 
         //selectTime = (RelativeLayout) findViewById(R.id.selectTime);
         //selectTime.setOnClickListener(this);
-        selectDate = (RelativeLayout) findViewById(R.id.selectDate);
-        selectDate.setOnClickListener(this);
-        currentDate = (TextView) findViewById(R.id.currentDate);
-        //currentTime = (TextView) findViewById(R.id.currentTime);
 
+        selectDate = (RelativeLayout) findViewById(R.id.selectDate);
+        currentDate = (TextView) findViewById(R.id.currentDate);
+        currentTime = (TextView) findViewById(R.id.days);
+        Reason = (TextView) findViewById(R.id.reason);
+        Leave_id = pref.getString("id", "");
+        //currentTime = (TextView) findViewById(R.id.currentTime);
+        ask_submit = (TextView)findViewById(R.id.ask_submit);
+
+
+        selectDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customDatePicker1.show(currentDate.getText().toString());
+            }
+        });
+
+        ask_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("runrunrun");
+                        String result = HttpLogin.AskForLeave(Leave_id, currentDate.getText().toString(),
+                                currentTime.getText().toString(), Reason.getText().toString());
+                        System.out.println("resultttttt:"+result);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("result", result);
+                        Message msg = new Message();
+                        msg.what = ASK_FOR_LEAVE;
+                        msg.setData(bundle);
+                        LeaveHandler.sendMessage(msg);
+                    }
+                }).start();
+            }
+        });
         initDatePicker();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.selectDate:
-                // 日期格式为yyyy-MM-dd
-                customDatePicker1.show(currentDate.getText().toString());
-                break;
-
-            //case R.id.selectTime:
-                // 日期格式为yyyy-MM-dd HH:mm
-                //customDatePicker2.show(currentTime.getText().toString());
-                //break;
-        }
-    }
 
     private void initDatePicker() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
@@ -78,5 +105,40 @@ public class AskForLeaveActivity extends Activity implements View.OnClickListene
 //        customDatePicker2.setIsLoop(true); // 允许循环滚动
     }
 
+
+    @SuppressLint("HandlerLeak")
+    Handler LeaveHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case ASK_FOR_LEAVE: {
+                    Bundle bundle = new Bundle();
+                    bundle = msg.getData();
+                    String result = bundle.getString("result");
+                    try {
+                        if (result.equals("success")) {
+                            final AlertDialog alert = new AlertDialog.Builder(AskForLeaveActivity.this).create();
+                            alert.setMessage("请假申请提交成功");
+                            alert.show();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    alert.dismiss();
+                                    finish();
+                                }
+                            }, 2000);
+                        }else{
+                            Toast.makeText(AskForLeaveActivity.this,"提交失败，请重试",Toast.LENGTH_SHORT);
+                        }
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }
+
+    };
 }
 

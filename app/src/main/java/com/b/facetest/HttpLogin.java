@@ -283,4 +283,25 @@ public class HttpLogin {
         return result;
     }
 
+    /**   zj    7/21
+     * 请假
+     */
+    public static String AskForLeave(String id,String start,String days,String reason){
+        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidStuAskForLeave.do";
+        String result = "";
+        String data = null;
+        try{
+            data = "stuid="+encode(id,"UTF-8")
+                    +"&start="+encode(start,"UTF-8")
+                    +"&days="+encode(days,"UTF-8")
+                    +"&reason="+encode(reason,"UTF-8");
+        }catch (UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+
+        result = tools(address,data);
+        return result;
+    }
+
 }
+
