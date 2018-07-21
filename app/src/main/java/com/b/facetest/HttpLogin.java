@@ -67,6 +67,12 @@ public class HttpLogin {
         return result;
     }
 
+    /**
+     * 登陆
+     * @param id
+     * @param password
+     * @return
+     */
     public static String LoginByPost(String id, String password) {
         String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidLogin.do";
         String result = "";
@@ -82,6 +88,14 @@ public class HttpLogin {
         return result;
     }
 
+    /**
+     * 注册
+     * @param id
+     * @param name
+     * @param password
+     * @param email
+     * @return
+     */
     public static String RegisterByPost(String id, String name, String password, String email) {
         String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidStuRegister.do";
         String result = "";
@@ -101,6 +115,13 @@ public class HttpLogin {
 
     }
 
+    /**
+     * 注册人脸
+     * @param id
+     * @param password
+     * @param if_data
+     * @return
+     */
     public static String FaceRegistByPost(String id, String password, String if_data) {
         String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidRegisterFace.do";
         String result = "";
@@ -117,6 +138,12 @@ public class HttpLogin {
         return result;
     }
 
+    /**
+     * 判断是否注册过人脸
+     * @param id
+     * @param flag
+     * @return
+     */
     public static String If_Face(String id, String flag) {
         String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidIfRegisterFace.do";
         String result = "";
@@ -132,6 +159,13 @@ public class HttpLogin {
         result = tools(address, data);
         return result;
     }
+
+    /**
+     * 考勤打卡
+     * @param id
+     * @param if_success
+     * @return
+     */
 
     public static String If_Arrive(String id, String if_success,String IP) {
         String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidAttendance.do";//需要修改地址
@@ -149,7 +183,11 @@ public class HttpLogin {
         return result;
     }
 
-
+    /**
+     * 查询考勤记录
+     * @param id
+     * @return
+     */
     public static String Query_myhistory(String id) {
         String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidQueryAllAttById.do";//需要修改地址
         String result = "";
@@ -165,7 +203,11 @@ public class HttpLogin {
         return result;
     }
 
-
+    /**
+     * 忘记密码
+     * @param id
+     * @return
+     */
     public static String ForgetPassword(String id) {
         String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidStuForget.do";
         String result = "";
@@ -218,6 +260,26 @@ public class HttpLogin {
             e.printStackTrace();
         }
 
+        return result;
+    }
+
+    /**
+     * 查询个人信息
+     * @param id
+     * @return
+     */
+    public static String Query_personalInfo(String id) {
+        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidQueryPersonalInfo.do";//需要修改地址
+        String result = "";
+        //我们请求的数据
+        String data = null;
+        try {
+            data = "id=" + encode(id, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        result = tools(address, data);
         return result;
     }
 

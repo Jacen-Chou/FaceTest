@@ -10,14 +10,20 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
 import android.os.Bundle;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 
 public class AfterLogin extends Shibie{
 
-    private Button arrive,cantarr,history,faceregist;
+    private Button arrive,cantarr,history,faceregist,personalInfo;
     private final static int IF_FACE_REGIST  = 3;//因为http传输增加参数   handler    7/17   zj
     private final static int QUERY_MY_HISTORY = 4;
     private final static int CHECK_FACE_FILE = 5;
+    private final static int QUERY_PERSONAL_INFO = 6;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class AfterLogin extends Shibie{
         cantarr = (Button) findViewById(R.id.cant_arr);
         history = (Button) findViewById(R.id.history);
         faceregist = (Button) findViewById(R.id.face_regist);
+        personalInfo = (Button) findViewById(R.id.personal_info);
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +123,27 @@ public class AfterLogin extends Shibie{
             }
         });
 
+        /**
+         * 点击个人信息按钮
+         */
+        personalInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {//开启线程从服务器确定是否可以注册人脸     zj
+                        String result = HttpLogin.Query_personalInfo(id);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("result", result);
+                        Message msg = new Message();
+                        msg.what = QUERY_PERSONAL_INFO;
+                        msg.setData(bundle);
+                        handler_personal_info.sendMessage(msg);
+                    }
+                }).start();
+            }
+        });
+
     }
 
 
@@ -149,8 +177,8 @@ public class AfterLogin extends Shibie{
             }
         }
     };
-    //查询考勤历史数据
 
+    //查询考勤历史数据
     @SuppressLint("HandlerLeak")
     Handler handler_history = new Handler(){
         @Override
@@ -221,5 +249,30 @@ public class AfterLogin extends Shibie{
         }
         return true;
     }
+
+    //查询个人信息
+    @SuppressLint("HandlerLeak")
+    Handler handler_personal_info = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case QUERY_PERSONAL_INFO:{
+                    Bundle bundle = new Bundle();
+                    bundle =msg.getData();
+                    String result = bundle.getString("result");
+                    try{
+                        Intent intent = new Intent(AfterLogin.this,PersonalInfo.class);
+                        intent.putExtra("result",result);
+                        startActivity(intent);
+                    }catch (NullPointerException e){
+                        e.printStackTrace();
+                    }
+
+                }
+                break;
+            }
+        }
+    };
 
 }
