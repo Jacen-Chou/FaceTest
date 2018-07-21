@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A4D3EE"
@@ -29,13 +30,14 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/selectDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/radius_drawable_bg"
         android:orientation="vertical"
-        android:layout_margin="20dip"
+        android:layout_marginHorizontal="20dip"
+        android:layout_marginVertical="10dip"
         android:padding="10dip" >
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,43 +57,49 @@
                 android:layout_alignParentEnd="true"
                 android:paddingStart="8dp"
                 android:text="开始时间"
-                android:textColor="#dbdbdb"
+                android:textColor="#969696"
                 android:textSize="21sp" />
         </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginBottom="5dip"
-            android:layout_marginTop="5dip"
-            android:background="#eeeeee" />
-        <LinearLayout
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radius_drawable_bg"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dip"
+        android:layout_marginVertical="10dip"
+        android:padding="10dip" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/days" />
+        <EditText
+            android:id="@+id/days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/days" />
-            <TextView
-                android:id="@+id/days"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="-4dip"
-                android:paddingStart="8dp"
-                android:text="请假天数"
-                android:textColor="#dbdbdb"
-                android:textSize="21sp" />
-        </LinearLayout>
-
+            android:paddingStart="8dp"
+            android:background="@null"
+            android:hint="请假天数"
+            android:inputType="number"
+            android:textSize="21sp"
+            />
     </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/radius_drawable_bg"
         android:orientation="vertical"
-        android:layout_margin="20dip"
+        android:layout_marginHorizontal="20dip"
+        android:layout_marginVertical="10dip"
         android:padding="10dip" >
 
         <EditText

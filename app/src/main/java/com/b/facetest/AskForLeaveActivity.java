@@ -1,6 +1,7 @@
 package com.b.facetest;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
         import android.os.Bundle;
         import android.view.View;
@@ -28,7 +29,7 @@ public class AskForLeaveActivity extends Activity implements View.OnClickListene
         setContentView(R.layout.activity_ask_for_leave);
 
         //selectTime = (RelativeLayout) findViewById(R.id.selectTime);
-        selectTime.setOnClickListener(this);
+        //selectTime.setOnClickListener(this);
         selectDate = (RelativeLayout) findViewById(R.id.selectDate);
         selectDate.setOnClickListener(this);
         currentDate = (TextView) findViewById(R.id.currentDate);
@@ -56,7 +57,7 @@ public class AskForLeaveActivity extends Activity implements View.OnClickListene
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
         currentDate.setText(now.split(" ")[0]);
-        currentTime.setText(now);
+//        currentTime.setText(now);
 
         customDatePicker1 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
@@ -67,14 +68,14 @@ public class AskForLeaveActivity extends Activity implements View.OnClickListene
         customDatePicker1.showSpecificTime(false); // 不显示时和分
         customDatePicker1.setIsLoop(false); // 不允许循环滚动
 
-        customDatePicker2 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
-            @Override
-            public void handle(String time) { // 回调接口，获得选中的时间
-                currentTime.setText(time);
-            }
-        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        customDatePicker2.showSpecificTime(true); // 显示时和分
-        customDatePicker2.setIsLoop(true); // 允许循环滚动
+//        customDatePicker2 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
+//            @Override
+//            public void handle(String time) { // 回调接口，获得选中的时间
+//                currentTime.setText(time);
+//            }
+//        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+//        customDatePicker2.showSpecificTime(true); // 显示时和分
+//        customDatePicker2.setIsLoop(true); // 允许循环滚动
     }
 
 }
