@@ -2,144 +2,311 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="15dp"
+    android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/arrive"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_margin="5sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"
-            android:layout_weight="1"
-            android:background="#0078D7"
-            android:drawablePadding="13sp"
-            android:drawableTop="@drawable/daka"
-            android:padding="20sp"
-            android:text="考勤打卡"
-            android:textColor="#fff"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/cant_arr"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_margin="5sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"
-            android:layout_weight="1"
-            android:background="#0078D7"
-            android:drawablePadding="13sp"
-            android:drawableTop="@drawable/qingjia"
-            android:padding="20sp"
-            android:text="请假"
-            android:textColor="#fff"
-            android:textSize="20sp" />
-    </LinearLayout>
-
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bbb" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10sp"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/history"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_margin="5sp"
-            android:layout_marginBottom="10sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"
-            android:layout_weight="1"
-            android:background="#0078D7"
-            android:drawablePadding="13sp"
-            android:drawableTop="@drawable/jilu"
-            android:padding="20sp"
-            android:text="考勤记录"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            tools:ignore="InvalidId" />
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="7dp"
+                android:paddingLeft="8dp"
+                android:src="@drawable/daka"/>
+            <Button
+                android:id="@+id/arrive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:text="考勤打卡"
+                android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/face_regist"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_margin="5sp"
-            android:layout_marginBottom="10sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"
-            android:layout_weight="1"
-            android:background="#0078D7"
-            android:drawablePadding="13sp"
-            android:drawableTop="@drawable/renlian_zhuce"
-            android:padding="20sp"
-            android:text="人脸注册"
-            android:textColor="#fff"
-            android:textSize="20sp" />
-        />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#eeeeee" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:paddingTop="11dp"
+                android:paddingLeft="10dp"
+                android:src="@drawable/qingjia"/>
+
+            <Button
+                android:id="@+id/cant_arr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:paddingLeft="11dp"
+                android:paddingTop="10dp"
+                android:text="申请请假"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#eeeeee" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:paddingTop="11dp"
+                android:paddingLeft="10dp"
+                android:src="@drawable/jilu"/>
+
+            <Button
+                android:id="@+id/personal_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:paddingLeft="18dp"
+                android:paddingTop="10dp"
+                android:text="考勤记录"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#eeeeee" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingTop="11dp"
+                android:paddingLeft="10dp"
+                android:src="@drawable/infor"/>
+
+            <Button
+                android:id="@+id/history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:paddingLeft="14dp"
+                android:paddingTop="10dp"
+                android:text="个人信息"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#eeeeee" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="11dp"
+                android:paddingLeft="10dp"
+                android:src="@drawable/renlian_zhuce"/>
+
+            <Button
+                android:id="@+id/face_regist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:text="人脸注册"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv"
+            android:gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:padding="10dp"
+            android:background="@drawable/text_view_border" />
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10sp"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/personal_info"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_margin="5sp"
-            android:layout_marginBottom="10sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"
-            android:layout_weight="1"
-            android:background="#0078D7"
-            android:drawablePadding="13sp"
-            android:drawableTop="@drawable/personal_information"
-            android:padding="20sp"
-            android:text="个人信息"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            tools:ignore="InvalidId" />
-        />
 
-        <!--占位，不可见-->
-        <Button
-            android:id="@+id/face_regis"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_margin="5sp"
-            android:layout_marginBottom="10sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"
-            android:layout_weight="1"
-            android:background="#0078D7"
-            android:drawablePadding="13sp"
-            android:drawableTop="@drawable/renlian_zhuce"
-            android:padding="20sp"
-            android:text="人脸注册"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            android:visibility="invisible"/>
-        />
-    </LinearLayout>
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<Button-->
+    <!--android:id="@+id/arrive"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_margin="5sp"-->
+    <!--android:layout_marginLeft="10sp"-->
+    <!--android:layout_marginRight="10sp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="#0078D7"-->
+    <!--android:drawablePadding="13sp"-->
+    <!--android:drawableTop="@drawable/daka"-->
+    <!--android:padding="20sp"-->
+    <!--android:text="考勤打卡"-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="20sp" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/cant_arr"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_margin="5sp"-->
+    <!--android:layout_marginLeft="10sp"-->
+    <!--android:layout_marginRight="10sp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="#0078D7"-->
+    <!--android:drawablePadding="13sp"-->
+    <!--android:drawableTop="@drawable/qingjia"-->
+    <!--android:padding="20sp"-->
+    <!--android:text="请假"-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="20sp" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginTop="10sp"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<Button-->
+    <!--android:id="@+id/history"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_margin="5sp"-->
+    <!--android:layout_marginBottom="10sp"-->
+    <!--android:layout_marginLeft="10sp"-->
+    <!--android:layout_marginRight="10sp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="#0078D7"-->
+    <!--android:drawablePadding="13sp"-->
+    <!--android:drawableTop="@drawable/jilu"-->
+    <!--android:padding="20sp"-->
+    <!--android:text="考勤记录"-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="20sp"-->
+    <!--tools:ignore="InvalidId" />-->
+    <!--/>-->
+
+    <!--<Button-->
+    <!--android:id="@+id/face_regist"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_margin="5sp"-->
+    <!--android:layout_marginBottom="10sp"-->
+    <!--android:layout_marginLeft="10sp"-->
+    <!--android:layout_marginRight="10sp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="#0078D7"-->
+    <!--android:drawablePadding="13sp"-->
+    <!--android:drawableTop="@drawable/renlian_zhuce"-->
+    <!--android:padding="20sp"-->
+    <!--android:text="人脸注册"-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="20sp" />-->
+    <!--/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginTop="10sp"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<Button-->
+    <!--android:id="@+id/personal_info"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_margin="5sp"-->
+    <!--android:layout_marginBottom="10sp"-->
+    <!--android:layout_marginLeft="10sp"-->
+    <!--android:layout_marginRight="10sp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="#0078D7"-->
+    <!--android:drawablePadding="13sp"-->
+    <!--android:drawableTop="@drawable/personal_information"-->
+    <!--android:padding="20sp"-->
+    <!--android:text="个人信息"-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="20sp"-->
+    <!--tools:ignore="InvalidId" />-->
+    <!--/>-->
+
+    <!--&lt;!&ndash;占位，不可见&ndash;&gt;-->
+    <!--<Button-->
+    <!--android:id="@+id/face_regis"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_margin="5sp"-->
+    <!--android:layout_marginBottom="10sp"-->
+    <!--android:layout_marginLeft="10sp"-->
+    <!--android:layout_marginRight="10sp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="#0078D7"-->
+    <!--android:drawablePadding="13sp"-->
+    <!--android:drawableTop="@drawable/renlian_zhuce"-->
+    <!--android:padding="20sp"-->
+    <!--android:text="人脸注册"-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="20sp"-->
+    <!--android:visibility="invisible"/>-->
+    <!--/>-->
+    <!--</LinearLayout>-->
 
 </LinearLayout>
