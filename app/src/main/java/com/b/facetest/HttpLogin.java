@@ -303,5 +303,28 @@ public class HttpLogin {
         return result;
     }
 
+    /**
+     * 修改密码
+     * @param id
+     * @param old_pass
+     * @param new_pass
+     * @return
+     */
+    public static String ModifyPass(String id, String old_pass, String new_pass) {
+        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidStuModifyPassword.do";
+        String result = "";
+        String data = null;
+        try{
+            data = "id="+encode(id,"UTF-8")
+                    +"&old_pass="+encode(old_pass,"UTF-8")
+                    +"&new_pass="+encode(new_pass,"UTF-8");
+        }catch (UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+
+        result = tools(address,data);
+        return result;
+    }
+
 }
 

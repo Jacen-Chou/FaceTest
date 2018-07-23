@@ -35,6 +35,7 @@
         <activity android:name=".ForgetActivity"></activity>
         <activity android:name=".AskForLeaveActivity"></activity>
         <activity android:name=".PersonalInfo"></activity>
+        <activity android:name=".ModifyPassActivity"></activity>
     </application>
 
 </manifest>

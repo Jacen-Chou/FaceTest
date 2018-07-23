@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -13,6 +15,7 @@ import org.json.JSONObject;
 public class PersonalInfo extends Activity{
 
     private TextView id, name, email, face_is_registered;
+    private Button modify_pass;
     String result;
 
     @Override
@@ -24,8 +27,9 @@ public class PersonalInfo extends Activity{
         name = (TextView) findViewById(R.id.name);
         email = (TextView) findViewById(R.id.email);
         face_is_registered = (TextView) findViewById(R.id.face_is_registered);
+        modify_pass = (Button) findViewById(R.id.modify_pass);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         result = intent.getStringExtra("result");
         //JSONArray jsonArray = null;
 
@@ -52,7 +56,15 @@ public class PersonalInfo extends Activity{
             e.printStackTrace();
         }
 
-
+        //点击修改密码按钮
+        modify_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PersonalInfo.this, ModifyPassActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
+
 }

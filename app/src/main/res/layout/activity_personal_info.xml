@@ -164,7 +164,20 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
+        <Button
+            android:id="@+id/modify_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="修改密码"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>

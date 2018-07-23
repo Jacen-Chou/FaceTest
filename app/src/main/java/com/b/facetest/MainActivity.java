@@ -42,8 +42,6 @@ public class MainActivity extends Activity{
         setContentView(R.layout.activity_main);
 
 
-
-
         pref = PreferenceManager.getDefaultSharedPreferences(this);//cookie功能   7/17      zj
 
         login = (TextView) findViewById(R.id.main_btn_login);
