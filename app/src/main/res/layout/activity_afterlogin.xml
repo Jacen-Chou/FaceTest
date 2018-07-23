@@ -162,14 +162,6 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv"
-            android:gravity="center"
-            android:layout_width="300dp"
-            android:layout_height="55dp"
-            android:padding="10dp"
-            android:background="@drawable/text_view_border" />
-
     </LinearLayout>
 
 
