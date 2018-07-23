@@ -42,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:layout_marginStart="8dp"
             android:gravity="center"
             android:text="学号"/>
 
@@ -72,12 +73,13 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/paw_code" />
+                android:src="@drawable/name" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:layout_marginStart="8dp"
                 android:gravity="center"
                 android:text="姓名"/>
 
@@ -108,12 +110,13 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/paw_code" />
+                android:src="@drawable/email" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:layout_marginStart="8dp"
                 android:gravity="center"
                 android:text="邮箱"/>
 
@@ -144,12 +147,13 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/paw_code" />
+                android:src="@drawable/renlian" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:layout_marginStart="8dp"
                 android:gravity="center"
                 android:text="是否注册人脸"/>
 
@@ -163,24 +167,24 @@
                 android:text="是/否"
                 android:textSize="18sp" />
         </LinearLayout>
-
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color1"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
-
-        <Button
-        android:id="@+id/modify_pass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="修改密码"/>
-
-        </LinearLayout>
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/modify_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="256dp"
+        android:background="@drawable/text_bg"
+        android:gravity="center"
+        android:paddingBottom="2dip"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:paddingTop="3dip"
+        android:text=" 修改密码"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
 </RelativeLayout>
 <!--<?xml version="1.0" encoding="utf-8"?>-->
 <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->

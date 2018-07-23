@@ -91,7 +91,7 @@
                 android:src="@drawable/jilu"/>
 
             <Button
-                android:id="@+id/personal_info"
+                android:id="@+id/history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -121,7 +121,7 @@
                 android:src="@drawable/infor"/>
 
             <Button
-                android:id="@+id/history"
+                android:id="@+id/personal_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
