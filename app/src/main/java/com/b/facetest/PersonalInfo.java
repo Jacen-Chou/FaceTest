@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -15,7 +16,7 @@ import org.json.JSONObject;
 public class PersonalInfo extends Activity{
 
     private TextView id, name, email, face_is_registered;
-    private Button modify_pass;
+    private TextView modify_pass,login_out;
     String result;
 
     @Override
@@ -27,7 +28,9 @@ public class PersonalInfo extends Activity{
         name = (TextView) findViewById(R.id.name);
         email = (TextView) findViewById(R.id.email);
         face_is_registered = (TextView) findViewById(R.id.face_is_registered);
-        modify_pass = (Button) findViewById(R.id.modify_pass);
+        modify_pass = (TextView) findViewById(R.id.modify_pass);
+        login_out = (TextView)findViewById(R.id.login_out);
+
 
         final Intent intent = getIntent();
         result = intent.getStringExtra("result");
@@ -61,6 +64,15 @@ public class PersonalInfo extends Activity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PersonalInfo.this, ModifyPassActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        login_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(PersonalInfo.this,MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });

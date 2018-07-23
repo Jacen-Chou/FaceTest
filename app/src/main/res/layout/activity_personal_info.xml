@@ -174,8 +174,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="256dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="253dp"
+        android:layout_marginStart="42dp"
         android:background="@drawable/text_bg"
         android:gravity="center"
         android:paddingBottom="2dip"
@@ -183,6 +184,23 @@
         android:paddingRight="15dip"
         android:paddingTop="3dip"
         android:text=" 修改密码"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/login_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/modify_pass"
+        android:layout_marginEnd="38dp"
+        android:background="@drawable/text_bg"
+        android:gravity="center"
+        android:paddingBottom="2dip"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:paddingTop="3dip"
+        android:text=" 注销账户"
         android:textColor="#ffffff"
         android:textSize="20sp" />
 </RelativeLayout>
