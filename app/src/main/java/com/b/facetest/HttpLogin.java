@@ -74,7 +74,7 @@ public class HttpLogin {
      * @return
      */
     public static String LoginByPost(String id, String password) {
-        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidLogin.do";
+        String address = "http://154.8.140.224:8080/FaceAttendanceSystem/AndroidLogin.do";
         String result = "";
         //我们请求的数据
         String data = null;
@@ -97,7 +97,7 @@ public class HttpLogin {
      * @return
      */
     public static String RegisterByPost(String id, String name, String password, String email) {
-        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidStuRegister.do";
+        String address = "http://154.8.140.224:8080/FaceAttendanceSystem/AndroidStuRegister.do";
         String result = "";
         //我们请求的数据
         String data = null;
@@ -123,7 +123,7 @@ public class HttpLogin {
      * @return
      */
     public static String FaceRegistByPost(String id, String password, String if_data) {
-        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidRegisterFace.do";
+        String address = "http://154.8.140.224:8080/FaceAttendanceSystem/AndroidRegisterFace.do";
         String result = "";
         String data = null;
         try {
@@ -145,7 +145,7 @@ public class HttpLogin {
      * @return
      */
     public static String If_Face(String id, String flag) {
-        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidIfRegisterFace.do";
+        String address = "http://154.8.140.224:8080/FaceAttendanceSystem/AndroidIfRegisterFace.do";
         String result = "";
         //我们请求的数据
         String data = null;
@@ -168,7 +168,7 @@ public class HttpLogin {
      */
 
     public static String If_Arrive(String id, String if_success,String IP) {
-        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidAttendance.do";//需要修改地址
+        String address = "http://154.8.140.224:8080/FaceAttendanceSystem/AndroidAttendance.do";//需要修改地址
         String result = "";
         String data = null;
         try {
@@ -189,7 +189,7 @@ public class HttpLogin {
      * @return
      */
     public static String Query_myhistory(String id) {
-        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidQueryAllAttById.do";//需要修改地址
+        String address = "http://154.8.140.224:8080/FaceAttendanceSystem/AndroidQueryAllAttById.do";//需要修改地址
         String result = "";
         //我们请求的数据
         String data = null;
@@ -209,7 +209,7 @@ public class HttpLogin {
      * @return
      */
     public static String ForgetPassword(String id) {
-        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidStuForget.do";
+        String address = "http://154.8.140.224:8080/FaceAttendanceSystem/AndroidStuForget.do";
         String result = "";
         try {
             URL url = new URL(address);//初始化URL
@@ -269,7 +269,7 @@ public class HttpLogin {
      * @return
      */
     public static String Query_personalInfo(String id) {
-        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidQueryPersonalInfo.do";//需要修改地址
+        String address = "http://154.8.140.224:8080/FaceAttendanceSystem/AndroidQueryPersonalInfo.do";//需要修改地址
         String result = "";
         //我们请求的数据
         String data = null;
@@ -287,7 +287,7 @@ public class HttpLogin {
      * 请假
      */
     public static String AskForLeave(String id,String start,String days,String reason){
-        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidStuAskForLeave.do";
+        String address = "http://154.8.140.224:8080/FaceAttendanceSystem/AndroidStuAskForLeave.do";
         String result = "";
         String data = null;
         try{
@@ -311,7 +311,7 @@ public class HttpLogin {
      * @return
      */
     public static String ModifyPass(String id, String old_pass, String new_pass) {
-        String address = "http://192.168.43.108/FaceAttendanceSystem/AndroidStuModifyPassword.do";
+        String address = "http://154.8.140.224:8080/FaceAttendanceSystem/AndroidStuModifyPassword.do";
         String result = "";
         String data = null;
         try{

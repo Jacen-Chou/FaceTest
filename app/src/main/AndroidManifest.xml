@@ -4,12 +4,13 @@
     package="com.b.facetest">
 
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
         android:allowBackup="true"
@@ -32,10 +33,10 @@
         <activity android:name=".Shibie" />
         <activity android:name=".Register" />
         <activity android:name=".QueryMyAtt" />
-        <activity android:name=".ForgetActivity"></activity>
-        <activity android:name=".AskForLeaveActivity"></activity>
-        <activity android:name=".PersonalInfo"></activity>
-        <activity android:name=".ModifyPassActivity"></activity>
+        <activity android:name=".ForgetActivity"/>
+        <activity android:name=".AskForLeaveActivity"/>
+        <activity android:name=".PersonalInfo"/>
+        <activity android:name=".ModifyPassActivity"/>
     </application>
 
 </manifest>

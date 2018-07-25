@@ -65,7 +65,7 @@ public class AskForLeaveActivity extends MainActivity{
                         System.out.println("runrunrun");
                         String result = HttpLogin.AskForLeave(Leave_id, currentDate.getText().toString(),
                                 currentTime.getText().toString(), Reason.getText().toString());
-                        System.out.println("resultttttt:"+result);
+//                        System.out.println("resultttttt:"+result);
                         Bundle bundle = new Bundle();
                         bundle.putString("result", result);
                         Message msg = new Message();
